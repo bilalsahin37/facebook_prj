@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
@@ -5,7 +6,9 @@ from django.utils.html import mark_safe
 
 
 from PIL import Image
+from django.utils.text import slugify
 from shortuuid.django_fields import ShortUUIDField
+import shortuuid
 
 
 RELATIONSHIP = (
@@ -87,10 +90,11 @@ class Profile(models.Model):
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     followings = models.ManyToManyField(User, blank=True, related_name="followings")
     friends = models.ManyToManyField(User, blank=True, related_name="friends")
-    #groups = models.ManyToManyField("core.Group", blank=True, related_name="groups")
-    #pages = models.ManyToManyField("core.Page", blank=True, related_name="pages")
+    # groups = models.ManyToManyField("core.Group", blank=True, related_name="groups")
+    # pages = models.ManyToManyField("core.Page", blank=True, related_name="pages")
     blocked = models.ManyToManyField(User, blank=True, related_name="blocked")
     date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     class Meta:
         ordering = ["-date"]
@@ -100,3 +104,12 @@ class Profile(models.Model):
             return str(self.full_name)
         else:
             return str(self.user.username)
+
+    def save(self, *args, **kwargs):
+        if self.slug == "" or self == None:
+            uuid_key = shortuuid.uuid()
+            uniqueid = uuid_key[:2]
+            self.slug = slugify(self.full_name) + '-' + str(uniqueid.lower())
+        super(Profile, self).save(*args, **kwargs)
+
+        
