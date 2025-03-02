@@ -105,9 +105,25 @@ class Profile(models.Model):
         else:
             return str(self.user.username)
 
+
+
     def save(self, *args, **kwargs):
         if not self.slug:  # self.slug boş ya da None ise True döner
             uuid_key = shortuuid.uuid()
             uniqueid = uuid_key[:2]
             self.slug = slugify(self.full_name) + '-' + str(uniqueid.lower())
         super(Profile, self).save(*args, **kwargs)
+
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile, sender=User)
