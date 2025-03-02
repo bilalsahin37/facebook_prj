@@ -87,8 +87,8 @@ class Profile(models.Model):
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     followings = models.ManyToManyField(User, blank=True, related_name="followings")
     friends = models.ManyToManyField(User, blank=True, related_name="friends")
-    groups = models.ManyToManyField("core.Group", blank=True, related_name="groups")
-    pages = models.ManyToManyField("core.Page", blank=True, related_name="pages")
+    #groups = models.ManyToManyField("core.Group", blank=True, related_name="groups")
+    #pages = models.ManyToManyField("core.Page", blank=True, related_name="pages")
     blocked = models.ManyToManyField(User, blank=True, related_name="blocked")
     date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
