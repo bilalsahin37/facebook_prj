@@ -6,8 +6,8 @@ from django.utils.html import mark_safe
 
 
 from PIL import Image
-from django.utils.text import slugify
 from shortuuid.django_fields import ShortUUIDField
+from django.utils.text import slugify
 import shortuuid
 
 
@@ -106,10 +106,8 @@ class Profile(models.Model):
             return str(self.user.username)
 
     def save(self, *args, **kwargs):
-        if self.slug == "" or self == None:
+        if not self.slug:  # self.slug boş ya da None ise True döner
             uuid_key = shortuuid.uuid()
             uniqueid = uuid_key[:2]
             self.slug = slugify(self.full_name) + '-' + str(uniqueid.lower())
         super(Profile, self).save(*args, **kwargs)
-
-        
