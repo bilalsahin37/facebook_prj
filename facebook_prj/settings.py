@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     # Custom Apps
     "userauths",
     "core",
     "addon",
+    
     # 3rd Party Apps
     "crispy_forms",
     "taggit",
@@ -158,7 +160,7 @@ LOGIN_REDIRECT_URL = ""
 LOGIN_URL = "userauths:sign-up"
 LOGOUT_REDIRECT_URL = "userauths:sign-up"
 
-
+AUTH_USER_MODEL = "userauths.User"
 
 JAZZMIN_SETTINGS = {
     "site_header": "Paranormal Book",
