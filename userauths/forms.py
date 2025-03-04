@@ -62,6 +62,10 @@ class UserRegisterForm(UserCreationForm):
             # visible.field.widget.attrs['placeholder'] = visible.field.label
 
 
+
+
+
+
 class ProfileUpdateForm(forms.ModelForm):
     image = ImageField(widget=FileInput)
 
