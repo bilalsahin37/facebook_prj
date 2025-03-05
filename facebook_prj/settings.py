@@ -162,6 +162,11 @@ LOGOUT_REDIRECT_URL = "userauths:sign-up"
 
 AUTH_USER_MODEL = "userauths.User"
 
+
+
+
+
+
 JAZZMIN_SETTINGS = {
     "site_header": "Paranormal Book",
     "site_brand": "Connecting people together...",
