@@ -67,8 +67,9 @@
                 {% endif %}
 
 
+                
 
-
+                <!-- LOGIN FORM -->
                 <form class="p-6 space-y-4 relative bg-white shadow-lg rounded-lg" method="POST" action="{% url 'userauths:sign-in' %}">
                     {% csrf_token %}
                     <input type="email" name="email" placeholder="Email or Phone Number" class="with-border">
@@ -96,7 +97,7 @@
 
 
 
-    <!-- This is the modal -->
+    <!-- This is the modal REGISTER FORM -->
     <div id="register" uk-modal>
         <div class="uk-modal-dialog uk-modal-body rounded-xl shadow-2xl p-0 lg:w-5/12">
             <button class="uk-modal-close-default p-3 bg-gray-100 rounded-full m-3" type="button" uk-close></button>
@@ -104,6 +105,8 @@
                 <div class="lg:text-2xl text-xl font-semibold mb-1"> Sign Up</div>
                 <div class="text-base text-gray-600"> It’s quick and easy.</div>
             </div>
+
+
             <form class="p-7 space-y-5" novalidate method="POST">
                 {% csrf_token %}
 
@@ -161,6 +164,8 @@
 
 
             </form>
+
+
 
         </div>
     </div>
