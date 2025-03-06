@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -13,9 +13,11 @@ from userauths.forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 
 
 
-def RegisterView(request):
+def RegisterView(request, *args, **kwargs):
     if request.user.is_authenticated:
-        messages.warning(request, "You are registered")
+        messages.warning(
+            request, f"Hey {request.user.username}, you are already logged in"
+        )
         return redirect("core:feed")
 
     form = UserRegisterForm(request.POST or None)
@@ -27,25 +29,19 @@ def RegisterView(request):
         password = form.cleaned_data.get("password1")
 
         user = authenticate(email=email, password=password)
-        if user is not None:
-            login(request, user)
+        login(request, user)
 
-            # Doğru kullanım: user nesnesi üzerinden veya request.user ile erişim sağlanır.
-            profile = Profile.objects.get(user=user)
-            # Alternatif kullanım:
-            # profile = Profile.objects.get(user=request.user)
+        messages.success(
+            request,
+            f"Hi {request.user.username}, your account have been created successfully.",
+        )
 
-            profile.full_name = full_name
-            profile.phone = phone
-            profile.save()
+        profile = Profile.objects.get(user=request.user)
+        profile.full_name = full_name
+        profile.phone = phone
+        profile.save()
 
-            messages.success(
-                request,
-                f"You have successfully registered, {full_name}! You can now log in.",
-            )
-            return redirect("core:feed")
-        else:
-            messages.error(request, "Authentication failed. Please try again.")
+        return redirect("core:feed")
 
     context = {"form": form}
     return render(request, "userauths/sign-up.html", context)
@@ -77,9 +73,9 @@ def LoginView(request):
 
         except:
             messages.error(request, "User does not exist")
+            return redirect("userauths:sign-up")
 
     return HttpResponseRedirect("/")
-
 
 
 
@@ -88,4 +84,4 @@ def LoginView(request):
 def LogoutView(request):
     logout(request)
     messages.success(request, "You have been logged out")
-    return redirect("userauths:sign-in")
+    return redirect("userauths:sign-up")
