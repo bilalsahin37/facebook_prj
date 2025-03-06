@@ -78,17 +78,24 @@
 
                 <!-- LOGIN FORM -->
                 <form class="p-6 space-y-4 relative bg-white shadow-lg rounded-lg" method="POST" action="{% url 'userauths:sign-in' %}">
+
                     {% csrf_token %}
+
                     <input type="email" name="email" placeholder="Email or Phone Number" class="with-border">
                     <input type="password" name="password" placeholder="Password" class="with-border">
+
                     <button type="submit" class="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full"> Log In </button>
+
                     <a href="#" class="text-blue-500 text-center block"> Forgot Password? </a>
+
                     <hr class="pb-3.5">
+
                     <div class="flex">
                         <a href="#register" type="button" class="bg-green-600 hover:bg-green-500 hover:text-white font-semibold py-3 px-5 rounded-md text-center text-white mx-auto" uk-toggle>
                             Create New Account
                         </a>
                     </div>
+
                 </form>
 
 
@@ -107,7 +114,9 @@
     <!-- This is the modal REGISTER FORM -->
     <div id="register" uk-modal>
         <div class="uk-modal-dialog uk-modal-body rounded-xl shadow-2xl p-0 lg:w-5/12">
+            
             <button class="uk-modal-close-default p-3 bg-gray-100 rounded-full m-3" type="button" uk-close></button>
+
             <div class="border-b px-7 py-5">
                 <div class="lg:text-2xl text-xl font-semibold mb-1"> Sign Up</div>
                 <div class="text-base text-gray-600"> It’s quick and easy.</div>
