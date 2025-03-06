@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
+    
     # Custom Apps
     "userauths",
     "core",
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "taggit",
     "import_export",
+    "mathfilters",
 ]
 
 MIDDLEWARE = [
