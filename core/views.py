@@ -34,6 +34,9 @@ noti_comment_replied = "Comment Replied"
 noti_friend_request_accepted = "Friend Request Accepted"
 
 
+
+
+
 @login_required
 def index(request):
     posts = Post.objects.filter(active=True, visibility="Everyone")
@@ -45,11 +48,20 @@ def index(request):
     return render(request, "core/index.html", context)
 
 
+
+
+
+
+
 @login_required
 def post_detail(request, slug):
     post = Post.objects.get(active=True, visibility="Everyone", slug=slug)
     context = {"p": post}
     return render(request, "core/post-detail.html", context)
+
+
+
+
 
 
 def send_notification(user, sender, post, comment, notification_type):
@@ -61,6 +73,10 @@ def send_notification(user, sender, post, comment, notification_type):
         notification_type=notification_type,
     )
     return notification
+
+
+
+
 
 
 @csrf_exempt
@@ -106,6 +122,10 @@ def create_post(request):
     return JsonResponse({"data": "Sent"})
 
 
+
+
+
+
 @csrf_exempt
 def like_post(request):
 
@@ -126,6 +146,11 @@ def like_post(request):
 
     data = {"bool": bool, "likes": post.likes.all().count()}
     return JsonResponse({"data": data})
+
+
+
+
+
 
 
 @csrf_exempt
@@ -155,6 +180,11 @@ def comment_on_post(request):
     return JsonResponse({"data": data})
 
 
+
+
+
+
+
 @csrf_exempt
 def like_comment(request):
 
@@ -178,6 +208,12 @@ def like_comment(request):
 
     data = {"bool": bool, "likes": comment.likes.all().count()}
     return JsonResponse({"data": data})
+
+
+
+
+
+
 
 
 @csrf_exempt
@@ -208,6 +244,12 @@ def reply_comment(request):
     return JsonResponse({"data": data})
 
 
+
+
+
+
+
+
 @csrf_exempt
 def delete_comment(request):
     id = request.GET["id"]
@@ -219,6 +261,12 @@ def delete_comment(request):
         "bool": True,
     }
     return JsonResponse({"data": data})
+
+
+
+
+
+
 
 
 @csrf_exempt
@@ -248,6 +296,12 @@ def add_friend(request):
         return JsonResponse({"success": "Sent", "bool": bool})
 
 
+
+
+
+
+
+
 @csrf_exempt
 def accept_friend_request(request):
     id = request.GET["id"]
@@ -274,6 +328,11 @@ def accept_friend_request(request):
     return JsonResponse({"data": data})
 
 
+
+
+
+
+
 @csrf_exempt
 def reject_friend_request(request):
     id = request.GET["id"]
@@ -291,6 +350,11 @@ def reject_friend_request(request):
         "bool": True,
     }
     return JsonResponse({"data": data})
+
+
+
+
+
 
 
 @csrf_exempt
@@ -313,6 +377,11 @@ def unfriend(request):
         my_friend.profile.friends.remove(sender)
         bool = True
         return JsonResponse({"success": "Unfriend Successfull", "bool": bool})
+
+
+
+
+
 
 
 @login_required
@@ -344,6 +413,11 @@ def inbox(request):
         "chat_message": chat_message,
     }
     return render(request, "chat/inbox.html", context)
+
+
+
+
+
 
 
 @login_required
@@ -396,6 +470,10 @@ def inbox_detail(request, username):
     return render(request, "chat/inbox_detail.html", context)
 
 
+
+
+
+
 def block_user(request):
     id = request.GET["id"]
     user = request.user
@@ -416,6 +494,10 @@ def block_user(request):
     return JsonResponse({"success": "User Blocked"})
 
 
+
+
+
+
 @login_required
 def group_inbox(request):
     groupchat = GroupChat.objects.filter(
@@ -426,6 +508,11 @@ def group_inbox(request):
         "groupchat": groupchat,
     }
     return render(request, "chat/group_inbox.html", context)
+
+
+
+
+
 
 
 @login_required
@@ -448,6 +535,10 @@ def group_inbox_detail(request, slug):
     return render(request, "chat/group_inbox_detail.html", context)
 
 
+
+
+
+
 def join_group_chat_page(request, slug):
     groupchat = GroupChat.objects.get(slug=slug, active=True)
 
@@ -455,6 +546,10 @@ def join_group_chat_page(request, slug):
         "groupchat": groupchat,
     }
     return render(request, "chat/join_group_chat_page.html", context)
+
+
+
+
 
 
 def join_group_chat(request, slug):
@@ -467,6 +562,10 @@ def join_group_chat(request, slug):
     return redirect("core:group_inbox_detail", groupchat.slug)
 
 
+
+
+
+
 def leave_group_chat(request, slug):
     groupchat = GroupChat.objects.get(slug=slug, active=True)
 
@@ -477,12 +576,22 @@ def leave_group_chat(request, slug):
     return redirect("core:join_group_chat_page", groupchat.slug)
 
 
+
+
+
 def games(request):
     return render(request, "games/all_games.html")
 
 
+
+
+
 def stack_brick(request):
     return render(request, "games/stack_brick.html")
+
+
+
+
 
 
 def search_users(request):
@@ -514,6 +623,11 @@ def search_users(request):
     else:
         users_data = []
     return JsonResponse({"users": users_data})
+
+
+
+
+
 
 
 def load_more_posts(request):
