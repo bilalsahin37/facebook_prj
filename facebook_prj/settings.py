@@ -157,7 +157,7 @@ LOGOUT_REDIRECT_URL = "userauths:sign-up"
 JAZZMIN_SETTINGS = {
     "site_header": "Paranormal Book",
     "site_brand": "Connecting people together...",
-    #"site_logo": "images/logo.png",
+    "site_logo": "images/logo.png",
     "copyright": "All Right Reserved 2025",
     "welcome_sign": "Welcome to Facebook Clone, Login Now.",
     "topmenu_links": [
