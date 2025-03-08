@@ -32,27 +32,24 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
     "jazzmin",
-    
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
-    
     # Custom Apps
     "userauths",
     "core",
     "addon",
-    
     # 3rd Party Apps
     "crispy_forms",
     "taggit",
     "import_export",
     "mathfilters",
+    #"channels",
+    #"widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -116,8 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -130,7 +125,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -141,11 +135,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 
-
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
 
 
 # Default primary key field type
@@ -154,19 +146,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
 # Other Configs
-#AUTH_USER_MODEL = "userauths.User"
+AUTH_USER_MODEL = "userauths.User"
 
 LOGIN_REDIRECT_URL = ""
 LOGIN_URL = "userauths:sign-up"
 LOGOUT_REDIRECT_URL = "userauths:sign-up"
-
-AUTH_USER_MODEL = "userauths.User"
-
-
-
-
 
 
 JAZZMIN_SETTINGS = {
@@ -209,8 +194,6 @@ JAZZMIN_SETTINGS = {
     },
     "show_ui_builder": True,
 }
-
-
 
 
 JAZZMIN_UI_TWEAKS = {
