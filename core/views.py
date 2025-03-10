@@ -39,7 +39,7 @@ noti_friend_request_accepted = "Friend Request Accepted"
 
 @login_required
 def index(request):
-    posts = Post.objects.filter(active=True, visibility="Everyone")
+    posts = Post.objects.filter(active=True, visibility="Everyone").order_by("-id")
 
     paginator = Paginator(posts, 3)
     page_number = request.GET.get("page")
