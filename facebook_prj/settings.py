@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "import_export",
     "mathfilters",
     #"channels",
-    #"widget_tweaks",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
