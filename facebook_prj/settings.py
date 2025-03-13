@@ -155,11 +155,11 @@ LOGOUT_REDIRECT_URL = "userauths:sign-up"
 
 
 JAZZMIN_SETTINGS = {
-    "site_header": "Paranormal Book",
-    "site_brand": "Connecting people together...",
+    "site_header": "Paranexus",
+    "site_brand": "Connecting people together paranormal cases...",
     "site_logo": "images/logo.png",
     "copyright": "All Right Reserved 2025",
-    "welcome_sign": "Welcome to Facebook Clone, Login Now.",
+    "welcome_sign": "Welcome to Paranexus, Login Now.",
     "topmenu_links": [
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "Company", "url": "/admin/addons/company/"},
