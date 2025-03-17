@@ -28,6 +28,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ASGI_APPLICATION = "facebook_prj.asgi.application"
+
+WSGI_APPLICATION = "facebook_prj.wsgi.application"
+
+CHANNEL_LAYER = {
+    'default': {
+                'BACKEND': 'channels.layers.InMemoryChannelLayer',
+            },
+        },
+    
+
 
 # Application definition
 
@@ -48,7 +59,7 @@ INSTALLED_APPS = [
     "taggit",
     "import_export",
     "mathfilters",
-    #"channels",
+    "channels",
     "widget_tweaks",
 ]
 
